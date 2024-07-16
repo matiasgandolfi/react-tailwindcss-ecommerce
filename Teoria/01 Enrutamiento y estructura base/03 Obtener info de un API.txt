@@ -1,0 +1,44 @@
+/*----------------------useState:---------------------------------*/
+ Siempre se usa para declarar una varibale
+
+        const [items, setItems] = useState(null);
+
+
+ /*----------------------useEffect:-------------------------------*/
+
+
+
+    Siempre que consumamos una API tenemos que pensar en 
+
+
+
+    useEffect para encapsular la respuesta
+
+
+        useEffect(() => {
+            fetch('https://api.escuelajs.co/api/v1/products')
+            .then(response => response.json())
+            .then(data => setItems(data))
+        }, [])
+
+
+
+    Pasar por parametro
+
+            return (
+                <>
+                    <Layout>
+                    Home
+                    {
+                        items?.map(item => (
+                        <Card key={item.id} data={item}/>
+                        ))
+                    }
+                    </Layout>
+                
+                </>
+                )
+
+
+
+function Card({data})

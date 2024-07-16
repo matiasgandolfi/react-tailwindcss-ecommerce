@@ -1,0 +1,93 @@
+npm install react-router-dom
+
+const AppRoutes = () => {
+  let routes = useRoutes([
+    {path: '/', element: <Home/>},
+    {path: '/my-order', element: <MyOrder/>},
+    {path: '/my-orders', element: <MyOrders/>},
+    {path: '/my-account', element: <MyAccount/>},
+    {path: '/sign-in', element: <SignIn/>},
+    {path: '/*', element: <NotFound/>},
+  ]);
+
+  return routes
+}
+
+const App = () => {
+    return (
+
+      <BrowserRouter>
+        <AppRoutes/>
+        <Navbar/>
+      </BrowserRouter>
+    )
+  }
+  
+  export default App;
+  
+
+
+
+
+  /*----------------------Link active-----------------------------------*/
+
+
+  import { NavLink } from "react-router-dom"
+
+const Navbar = () => {
+    const activeStyle = "underline underline-offset-4"
+
+
+    return(
+        <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 text-sm font-light">
+            <ul className='flex items-center gap-3'>
+                <li className="font-semibold text-lg">
+                    <NavLink 
+                        to='/'>
+                        Shopi
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/'className={({isActive}) => 
+                            isActive ? activeStyle : undefined}>All</NavLink>
+                </li>
+                <li>
+                    <NavLink to='/'
+                    className={({isActive}) => 
+                        isActive ? activeStyle : undefined}>Clothes</NavLink>
+                </li>
+            </ul>
+
+            <ul className="flex items-center gap-3">
+                <li className="text-black/60">
+                    teff@pruebas.com
+                </li>
+                <li>
+                    <NavLink to='/my-order'
+                        className={({isActive}) => 
+                        isActive ? activeStyle : undefined}>MyOrder</NavLink>
+                </li>
+            </ul>
+        </nav>
+    )
+
+}
+
+export default Navbar;
+
+
+
+
+/*------------Layout---------------------------------*/
+
+
+
+const Layout =  ({children}) => {
+    return(
+        <div className="flex flex-col mt-20 items-center">
+            {children}
+        </div>
+    )
+}
+
+export default Layout;
