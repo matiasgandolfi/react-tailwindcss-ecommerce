@@ -9,6 +9,19 @@ const Navbar = () => {
     const context = useContext(ShoppingCartContext);
 
 
+    const shoppingCart = () => {
+        console.log('Prueba');
+        if(context.isShoppingCartOpen){
+            context.setIsShoppingCartOpen(false)         
+        } 
+        else
+        {
+            context.setIsShoppingCartOpen(true)
+        }
+    }
+    
+
+
     return(
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 text-sm font-light">
             <ul className='flex items-center gap-3'>
@@ -20,32 +33,40 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink to='/'className={({isActive}) => 
-                            isActive ? activeStyle : undefined}>All</NavLink>
+                            isActive ? activeStyle : undefined}
+                            onClick={() => context.setSearchByCategory()}>
+                        All</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink
+                    to='/clothes'
+                    onClick={() => context.setSearchByCategory('clothe')}
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined}>Clothes</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink to='/electronics'
+                        onClick={() => context.setSearchByCategory('electronic')}
                         className={({isActive}) => 
                         isActive ? activeStyle : undefined}>Electronics</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink to='/furnitures'
+                        onClick={() => context.setSearchByCategory('furniture')}
                         className={({isActive}) => 
                         isActive ? activeStyle : undefined}>Furnitures </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink to='/toys'
+                        onClick={() => context.setSearchByCategory('toy')}
                         className={({isActive}) => 
                         isActive ? activeStyle : undefined}>Toys</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink to='/others'
+                        onClick={() => context.setSearchByCategory('other')}
                         className={({isActive}) => 
-                        isActive ? activeStyle : undefined}>Shopi </NavLink>
+                        isActive ? activeStyle : undefined}>Others </NavLink>
                 </li>
             </ul>
 
@@ -69,9 +90,11 @@ const Navbar = () => {
                 <li>
                     <NavLink to='/sign-in'>Sign In</NavLink>
                 </li>
-                <li className="flex justify-center items-center">
-                    <NavLink to='/'> <ShoppingBagIcon className="h-6 w-6"/></NavLink>
-                    <div>{context.count}</div>
+                <li 
+                    className="flex justify-center items-center"
+                    onClick={() => shoppingCart()}>
+                    <ShoppingBagIcon className="h-6 w-6"/>
+                    <div>{context.cartProducts.length}</div>
                 </li>
                 <li>
                     <NavLink to='/'>Others</NavLink>
